@@ -25,13 +25,14 @@ export async function SendEmail (app: FastifyInstance) {
                 }
             });
 
-            transport.sendMail({
+            const sendRuning = await transport.sendMail({
                 from: process.env.MAIL_FROM,
                 to:email,
                 subject: `Email resposta de Claudio Soares`,
                 html:html_email(name)
             });
 
+            console.log(sendRuning)
             return "Email successfully sent!"
      
         } catch (error) {
