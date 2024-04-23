@@ -16,17 +16,17 @@ export async function SendEmail (app: FastifyInstance) {
             const {name, email}:IMenssengeEmailType = request.body as IMenssengeEmailType;
 
             const transport = nodemailer.createTransport({
-                host: 'smtp-mail.outlook.com',
+                host: process.env.MAIL_HOST,
                 port:  587,
                 secure: false,
                 auth: {
-                    user: 'claudioasoares@outlook.com',
-                    pass: '@Legionario1103#'
+                    user: process.env.MAIL_USER,
+                    pass: process.env.MAIL_PASS
                 }
             });
 
             transport.sendMail({
-                from: 'claudioasoares@outlook.com',
+                from: process.env.MAIL_FROM,
                 to:email,
                 subject: `Email resposta de Claudio Soares`,
                 html:html_email(name)
